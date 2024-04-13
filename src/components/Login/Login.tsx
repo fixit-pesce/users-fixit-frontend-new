@@ -9,6 +9,9 @@ import {
   FormLabel,
   Input,
   Button,
+  Text,
+  Box,
+  Link,
 } from "@chakra-ui/react";
 
 import { AxiosError } from "axios";
@@ -24,7 +27,7 @@ import { BaseSyntheticEvent } from "react";
 
 import { useState } from "react";
 import { useToast } from '@chakra-ui/react'
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Login() {
 const [isLoading , setIsLoading] = useState(false)
@@ -83,6 +86,9 @@ return (
           <PasswordField
             placeholder="Enter your password"
           />
+          <Box textAlign = "center">
+            <Text>Don't have an account? <Link as = {NavLink} to = "/signup" color = "primary.400" textDecoration = "underline">Sign Up.</Link></Text>
+          </Box>
           <Button
             bg = "primary.400"
             color= "white"

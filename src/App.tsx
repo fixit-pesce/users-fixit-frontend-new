@@ -16,7 +16,7 @@ export default function App() {
         <Route path = "/signup" element = {<SignUpPage />} />
         <Route path = "/profile" element = {<ProfilePage />} />
         <Route path = "/services" element = {<ServicesPage />} />
-        <Route path = "/services/:service_name" element = {<ServiceDescriptionPage/>} />
+        <Route path = "/services/:sp_name/:service_name" element = {<ServiceDescriptionPage/>} />
       </Routes>
     </Box>
   )
