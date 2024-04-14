@@ -40,7 +40,7 @@ const mutation = useMutation({
   onSuccess: (data: {access_token: string, token_type: string}) => {
     localStorage.setItem('token', data.access_token)
     const decoded: any = jwtDecode(data.access_token)
-    localStorage.setItem('sp_username', decoded["username"])
+    localStorage.setItem('username', decoded["username"])
     navigate('/profile')
     setIsLoading(false)
   },
@@ -65,13 +65,13 @@ const handleSubmit = (e: BaseSyntheticEvent) => {
 }
 
 return (
-  <Card maxW="md" p = {8} bg = "foreground" boxShadow="lg">
+  <Card maxW="md" p = {8} bg = "foreground" boxShadow="lg" m = {4}>
     <Stack spacing = {4}>
       <Center>
         <Icon as={MdHandyman} h = "32px" w = "32px"/>
         <Heading pl = "12px" fontSize = "28px" onClick = {() => navigate('/')} cursor = "pointer">Fixit - Users</Heading>
       </Center>
-      <Heading>Login to your account</Heading>
+      <Heading textAlign="center">Login to your account</Heading>
       <Divider orientation='horizontal' borderColor = "black"/>
       <form>
         <Stack spacing="5">

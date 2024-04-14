@@ -7,7 +7,7 @@ interface BaseLayoutProps {
 
 export default function BaseLayout({children}: BaseLayoutProps) {
   return (
-    <Box bg = "primary.100" h = "100vh">
+    <Box bgGradient = "linear(to-br, primary.200, primary.500, primary.900)" minH = "100vh">
       <Navbar/>
       {children}
     </Box>

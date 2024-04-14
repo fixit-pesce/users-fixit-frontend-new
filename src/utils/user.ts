@@ -27,6 +27,6 @@ export const getCurrentUser = () : User | null => {
 
 export const logout = () => {
   localStorage.removeItem('token')
-  localStorage.removeItem('sp_username')
+  localStorage.removeItem('username')
   window.location.replace("/")
 }
