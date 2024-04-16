@@ -125,7 +125,7 @@ export default function Navbar() {
                   <PopoverBody mx = "auto">
                     <Link
                       as = {NavLink}
-                      to = "/profile"
+                      to = "/me/profile"
                       display = "block"
                       py = "2"
                       _activeLink={{color: "primary.400"}}

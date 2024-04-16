@@ -13,8 +13,8 @@ export default function ServicePage() {
   })
   return (
     <BaseLayout>
-      <Box mx = "auto">
-        <Flex w = {{base: "100%", md: "60%"}} mx = "auto" my = "5">
+      <Box>
+        <Flex justifyContent="center" mt = "4" mb = "2" w = {{base: "100%", md: "60%"}} mx = "auto">
           <SearchBar/>
         </Flex>
         <Flex p = "4" gap = "6" justifyContent="center" textAlign="center" flexWrap="wrap">

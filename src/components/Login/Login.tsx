@@ -41,7 +41,7 @@ const mutation = useMutation({
     localStorage.setItem('token', data.access_token)
     const decoded: any = jwtDecode(data.access_token)
     localStorage.setItem('username', decoded["username"])
-    navigate('/profile')
+    navigate('/me/profile')
     setIsLoading(false)
   },
   onError: (res: AxiosError) => {

@@ -1,42 +1,45 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
 import MyProfile from "../components/Profile/MyProfile";
 import MyReviews from "../components/Profile/MyReviews";
 import MyBookings from "../components/Profile/MyBookings";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Link } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
 export default function ProfilePage() {
   return (
     <BaseLayout>
-      <Flex>
+      <Flex bg = "primary.100">
         <Flex
           w = "240px"
-          bg = "white"
+          bg = "secondary.400"
           minH = {{base: "calc(100vh - 56px)", md: "calc(100vh - 59.2px)"}}
           boxShadow = "lg"
           textAlign = "center"
           flexDirection="column"
-          gap = "4"
-          p = "2"
+          fontWeight = "bold"
+          color = "primary.900"
           >
           <Link
             as = {NavLink}
-            to = "/profile"
-            _activeLink = {{bg: "primary.400"}}
+            to = "/me/profile"
+            _activeLink = {{bg: "secondary.500", color: "white", fontWeight: "bold"}}
+            p = "2"
           >
           My Profile
           </Link>
           <Link
             as = {NavLink}
-            to = "/reviews"
+            to = "/me/reviews"
+            _activeLink = {{bg: "secondary.500", color: "white", fontWeight: "bold"}}
             p = "2"
           >
           My Reviews
           </Link>
           <Link
             as = {NavLink}
-            to = "/bookings"
+            to = "/me/bookings"
+            _activeLink = {{bg: "secondary.500", color: "white", fontWeight: "bold"}}
             p = "2"
           >
           My Bookings

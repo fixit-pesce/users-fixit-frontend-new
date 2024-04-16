@@ -32,7 +32,7 @@ export default function SearchBar() {
   }
   
   return (
-    <Box position = "relative">
+    <Box position = "relative" w = "100%">
       <InputGroup>
         <Input
           type = "search"
@@ -54,6 +54,7 @@ export default function SearchBar() {
         borderRadius = "md"
         pos = "absolute"
         top = "48px"
+        zIndex = {9999}
         >
         {isSearching && options?.map((option, i: number) => (
           <Text
