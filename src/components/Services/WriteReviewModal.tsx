@@ -1,15 +1,84 @@
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useToast } from '@chakra-ui/react'
 import { useState } from 'react'
+import { writeReview } from '../../api/ServicesApi'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { useQueryClient } from '@tanstack/react-query'
 
 
 interface WriteReviewModalProps {
   isOpen: boolean
   onClose: () => void
+  service_name: string
+  sp_username: string
+  username: string
 }
 
-export default function WriteReviewModal({isOpen, onClose}: WriteReviewModalProps) {
+export default function WriteReviewModal({isOpen, onClose, service_name, sp_username, username}: WriteReviewModalProps) {
   const [review, setReview] = useState("")
   const [rating, setRating] = useState(0)
+
+  const toast = useToast()
+  const queryClient = useQueryClient()
+
+  const mutation = useMutation({
+    mutationFn: writeReview,
+    onSuccess: () => {
+      toast({
+        title: "Review submitted successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      })
+      queryClient.invalidateQueries({queryKey: ["services", sp_username, service_name, "reviews"]})
+      onClose()
+    },
+    onError: (res: AxiosError) => {
+      toast({
+        title: res.response?.data ? `Error: ${Object.entries(res.response?.data)[0][1]}` : `Error: ${res.message}`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
+  })
+
+  const handleSubmit = () => {
+    if (rating === 0) {
+      toast({
+        title: "Rating cannot be 0",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
+
+    if (review === "") {
+      toast({
+        title: "Review cannot be empty",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
+
+    if (rating < 1 && rating > 5){
+      toast({
+        title: "Rating must be between 1 and 5",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
+
+    mutation.mutate({
+      username,
+      sp_username,
+      service_name,
+      rating,
+      description: review
+    })
+  }
 
   return (
     <Modal isOpen = {isOpen} onClose = {onClose} size = "2xl">
@@ -22,7 +91,7 @@ export default function WriteReviewModal({isOpen, onClose}: WriteReviewModalProp
         <ModalBody>
           <FormControl>
             <FormLabel>Rating</FormLabel>
-            <Input placeholder="Enter rating" value = {rating} onChange = {(e) => setRating(parseInt(e.target.value))}/>
+            <Input placeholder="Enter rating" type = "number" value = {rating} onChange = {(e) => setRating(e.target.valueAsNumber)}/>
           </FormControl>
           <FormControl>
             <FormLabel>Review</FormLabel>
@@ -30,7 +99,7 @@ export default function WriteReviewModal({isOpen, onClose}: WriteReviewModalProp
           </FormControl>
         </ModalBody>
         <ModalFooter justifyContent="center" gap = "4">
-          <Button colorScheme='blue'>Submit</Button>
+          <Button colorScheme='blue' onClick = {handleSubmit}>Submit</Button>
           <Button colorScheme = "red" onClick = {onClose}>Cancel</Button>
         </ModalFooter>
       </ModalContent>

@@ -1,9 +1,10 @@
-import { Flex, Heading, Box, Text } from "@chakra-ui/react";
+import { Flex, Heading, Box, Text, Link } from "@chakra-ui/react";
 import BaseLayout from "../layouts/BaseLayout";
 import SearchBar from "../components/Search/SearchBar";
 import { Category } from "../types";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "../api/ServicesApi";
+import { NavLink } from "react-router-dom";
 
 export default function LandingPage() {
   const {data} = useQuery<Category[]>({
@@ -36,6 +37,11 @@ export default function LandingPage() {
           <Box w = "80%" mx = "auto">
             <SearchBar/>
             <Text textAlign="center" py = "2" fontSize = "2xl" fontWeight="bold" color = "primary.900">Search across 100s of services</Text>
+            <Box pt = "4">
+              <Text textAlign="center" color = "primary.900" fontSize = "xl" fontWeight="bold">
+                Want to be a service provider? <br/> Click here to <Link as = {NavLink} href="/signup" color = "secondary.400" textDecoration = "underline">sign up</Link>
+              </Text>
+            </Box>
           </Box>
         </Flex>
       </Flex>

@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
-import { Box, Stack, FormControl, FormLabel, Input, Button, Text, useToast, Grid, GridItem, Flex, Heading, Icon, Link } from "@chakra-ui/react";
+import { Box, Stack, FormControl, FormLabel, Input, Button, Text, useToast, Flex, Heading, Icon, Link, Grid, GridItem } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { signupUser } from '../../api/LoginApi';
-import { MdHandyman } from 'react-icons/md';
+import { MdPerson } from 'react-icons/md'; // Icon for users
 
 export default function Signup() {
-  const [isLoading , setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
 
   const mutation = useMutation({
     mutationFn: signupUser,
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
         position: 'top',
-        title: "Sucessfully created service provider",
+        title: "Successfully created user account",
         status: 'success',
         duration: 3000,
         isClosable: true
-      })      
-      navigate('/');
+      })
+      navigate('/'); // Redirect to home after successful signup
       setIsLoading(false);
     },
     onError: (error) => {
@@ -35,28 +35,17 @@ export default function Signup() {
     }
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData(e.target);
     const username = formData.get('username') as string;
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
     const email = formData.get('email') as string;
-    const companyName = formData.get('companyName') as string;
+    const phoneNo = formData.get('phoneNo') as string;
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
-
-    if (!username.startsWith("sp-")) {
-      toast({
-        position: "top",
-        title: "Error",
-        description: "Username must start with 'sp-'",
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      });
-      setIsLoading(false);
-      return;
-    }
 
     // Add validation logic here if needed
     if (password !== confirmPassword) {
@@ -72,20 +61,56 @@ export default function Signup() {
       return;
     }
 
-    mutation.mutate({ username, email, company_name: companyName, password });
+    mutation.mutate({ username, first_name: firstName, last_name: lastName, email, phone_no: phoneNo, password });
   };
 
   return (
     <Flex bg="white" p="6" flexDirection="column">
-      <Box textAlign = "center" mb = "4">
-        <Icon as={MdHandyman} h = "32px" w = "32px"/>
-        <Heading pl = "12px" fontSize = "28px" onClick = {() => navigate('/')} cursor = "pointer">Fixit - Service Providers</Heading>
-        <Text fontSize = "2xl">Create an account</Text>
+      <Box textAlign="center" mb="4">
+        <Icon as={MdPerson} h="32px" w="32px" />
+        <Heading pl="12px" fontSize="28px" onClick={() => navigate('/')} cursor="pointer">User Signup</Heading>
+        <Text fontSize="2xl">Create an account</Text>
       </Box>
       <Box>
         <form onSubmit={handleSubmit}>
           <Stack spacing="5">
             <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={{ base: 4, md: 8 }}>
+              <GridItem>
+                <FormControl>
+                  <FormLabel htmlFor="username">Username</FormLabel>
+                  <Input
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel htmlFor="firstName">First Name</FormLabel>
+                  <Input
+                    id="firstName"
+                    type="text"
+                    name="firstName"
+                    placeholder="Enter your first name"
+                    required
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl>
+                  <FormLabel htmlFor="lastName">Last Name</FormLabel>
+                  <Input
+                    id="lastName"
+                    type="text"
+                    name="lastName"
+                    placeholder="Enter your last name"
+                    required
+                  />
+                </FormControl>
+              </GridItem>
               <GridItem>
                 <FormControl>
                   <FormLabel htmlFor="email">Email</FormLabel>
@@ -100,29 +125,17 @@ export default function Signup() {
               </GridItem>
               <GridItem>
                 <FormControl>
-                  <FormLabel htmlFor="username">Username</FormLabel>
+                  <FormLabel htmlFor="phoneNo">Phone Number</FormLabel>
                   <Input
-                    id="username"
-                    type="text"
-                    name="username"
-                    placeholder="Enter your username"
+                    id="phoneNo"
+                    type="tel"
+                    name="phoneNo"
+                    placeholder="Enter your phone number"
                     required
                   />
                 </FormControl>
               </GridItem>
-              <GridItem colSpan={{ base: 1, md: 2 }}>
-                <FormControl>
-                  <FormLabel htmlFor="companyName">Company Name</FormLabel>
-                  <Input
-                    id="companyName"
-                    type="text"
-                    name="companyName"
-                    placeholder="Enter your company name"
-                    required
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem>
+              <GridItem colSpan={2}>
                 <FormControl>
                   <FormLabel htmlFor="password">Password</FormLabel>
                   <Input
@@ -134,7 +147,7 @@ export default function Signup() {
                   />
                 </FormControl>
               </GridItem>
-              <GridItem>
+              <GridItem colSpan={2}>
                 <FormControl>
                   <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
                   <Input
@@ -147,16 +160,11 @@ export default function Signup() {
                 </FormControl>
               </GridItem>
             </Grid>
-            <Text
-              textAlign = "center">
-                {`Already have an account? `}
-                <Link
-                  as = {NavLink}
-                  to = "/"
-                  color = "primary.400"
-                  textDecoration = "underline">
-                    Log in
-                </Link>
+            <Text textAlign="center">
+              Already have an account?{' '}
+              <Link as={NavLink} to="/login" color="primary.400" textDecoration="underline">
+                Log in
+              </Link>
             </Text>
             <Button
               bg="primary.400"

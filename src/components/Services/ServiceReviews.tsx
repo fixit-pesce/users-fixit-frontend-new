@@ -26,9 +26,11 @@ interface ServiceReviewsProps {
 
 export default function ServiceReviews({sp_username, service_name}: ServiceReviewsProps) {
   const {data} = useQuery<[Review]>({
-    queryKey: ["services", sp_username, service_name, "rating"],
+    queryKey: ["services", sp_username, service_name, "reviews"],
     queryFn: () => getServiceReviews(sp_username, service_name)
   })
+
+  const username = localStorage.getItem("username") ?? ""
   
   const {isOpen, onOpen, onClose} = useDisclosure()
 
@@ -47,7 +49,7 @@ export default function ServiceReviews({sp_username, service_name}: ServiceRevie
           <Text p = "2">{review.description}</Text>
         </Box>
       ))}
-      <WriteReviewModal isOpen = {isOpen} onClose = {onClose}/>
+      <WriteReviewModal isOpen = {isOpen} onClose = {onClose} sp_username = {sp_username} service_name = {service_name} username = {username}/>
     </Flex>
   )
 }

@@ -51,3 +51,19 @@ export const bookService = async({sp_username, service_name, category, company_n
   })
   return response.data
 }
+
+
+export const getMyReviews = async({username}: {username: string}) => {
+  const response = await api.get(`/users/${username}/reviews`)
+  return response.data
+}
+
+
+export const writeReview = async({username, sp_username, service_name, rating, description}: {username: string, service_name: string, sp_username: string, rating: number, description: string}) => {
+  const response = await api.post(`/service-providers/${sp_username}/services/${service_name}/reviews`, {
+    username,
+    rating,
+    description
+  })
+  return response.data
+}

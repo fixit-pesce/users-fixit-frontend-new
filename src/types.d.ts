@@ -17,7 +17,7 @@ export interface FAQ{
 
 
 export interface Review{
-  username: string
+  service_name: string
   rating: number
   description: string
   created_at: string
@@ -27,4 +27,11 @@ export interface Review{
 export interface Category{
   name: string
   icon: SVGElement
+}
+
+export interface User{
+  username: string
+  email: string
+  first_name: string
+  last_name: string
 }

@@ -9,11 +9,10 @@ import { NavLink } from "react-router-dom";
 export default function ProfilePage() {
   return (
     <BaseLayout>
-      <Flex bg = "primary.100">
+      <Flex bg = "primary.100" minH = {{base: "calc(100vh - 56px)", md: "calc(100vh - 59.2px)"}}>
         <Flex
           w = "240px"
           bg = "secondary.400"
-          minH = {{base: "calc(100vh - 56px)", md: "calc(100vh - 59.2px)"}}
           boxShadow = "lg"
           textAlign = "center"
           flexDirection="column"
@@ -45,7 +44,7 @@ export default function ProfilePage() {
           My Bookings
           </Link>
         </Flex>
-        <Box>
+        <Box w = "calc(100% - 240px)">
           <Routes>
             <Route path = "/profile" element = {<MyProfile/>}/>
             <Route path = "/reviews" element = {<MyReviews/>}/>
