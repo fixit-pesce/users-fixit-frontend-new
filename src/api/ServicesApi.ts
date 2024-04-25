@@ -40,14 +40,15 @@ export const searchService = async(search_term: string) => {
 }
 
 
-export const bookService = async({sp_username, service_name, category, company_name, price, phone_no}: {sp_username: string, service_name: string, company_name: string, category: string, price: number, phone_no: string}) => {
+export const bookService = async({sp_username, service_name, category, company_name, username, price, phone_no, payment_method}: {sp_username: string, service_name: string, company_name: string, category: string, price: number, phone_no: string, username: string, payment_method: {[key: string]: string}}) => {
   const response = await api.post(`/service-providers/${sp_username}/services/${service_name}/bookings`, {
     service_name,
     company_name,
     category,
     price,
-    username: sp_username,
+    username,
     phone_no,
+    payment_method
   })
   return response.data
 }

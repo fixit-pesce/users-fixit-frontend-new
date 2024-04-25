@@ -18,6 +18,7 @@ export interface FAQ{
 
 export interface Review{
   service_name: string
+  sp_username: string
   rating: number
   description: string
   created_at: string
@@ -34,4 +35,19 @@ export interface User{
   email: string
   first_name: string
   last_name: string
+  phone_no: string
+}
+
+
+export interface Booking{
+  service_name: string
+  company_name: string
+  category: string
+  price: number
+  username: string
+  phone_no: string
+  payment_method: {[key: string]: string}
+  booked_at: string
+  completed_at: string | null
+  status: string
 }

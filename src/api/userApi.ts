@@ -21,3 +21,16 @@ export const updateUser = async ({username, email, first_name, last_name}: {user
   })
   return response.data
 }
+
+export const updatePassword = async ({username, current_password, new_password}: {username: string, current_password: string, new_password: string}) => {
+  const response = await api.post(`/auth/change-password/${username}`, {
+    current_password,
+    new_password
+  })
+  return response.data
+}
+
+export const getUserBookings = async ({username}: {username: string}) => {
+  const response = await api.get(`/users/${username}/booked-services`)
+  return response.data
+}

@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Review } from "../../types";
 import { getMyReviews } from "../../api/ServicesApi";
 import { useQuery } from "@tanstack/react-query";
+import RatingDisplay from "../Services/RatingDisplay";
 
 export default function MyReviews() {
   const username = localStorage.getItem("username") ?? ""
@@ -17,7 +18,7 @@ export default function MyReviews() {
       <Box boxShadow = "md" bg = "white" p = "4" rounded = "md">
         {data && data.map((review, index) => (
           <Box key = {index}>
-            <Text>{review.rating}</Text>
+            <RatingDisplay rating = {review.rating}/>
             <Text>{review.description}</Text>
             <Text>{review.service_name}</Text>
             <Text>{review.sp_username}</Text>
