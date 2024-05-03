@@ -1,4 +1,4 @@
-export interface Service{
+export interface Service {
   name: string
   description: string
   price: number
@@ -8,15 +8,18 @@ export interface Service{
   avg_rating: number
   total_reviews: number
   total_bookings: number
+  location: {
+    locality: string
+    city: string
+  }
 }
 
-export interface FAQ{
+export interface FAQ {
   question: string
   answer: string
 }
 
-
-export interface Review{
+export interface Review {
   service_name: string
   sp_username: string
   rating: number
@@ -25,12 +28,12 @@ export interface Review{
   updated_at: string | null
 }
 
-export interface Category{
+export interface Category {
   name: string
   icon: SVGElement
 }
 
-export interface User{
+export interface User {
   username: string
   email: string
   first_name: string
@@ -38,15 +41,14 @@ export interface User{
   phone_no: string
 }
 
-
-export interface Booking{
+export interface Booking {
   service_name: string
   company_name: string
   category: string
   price: number
   username: string
   phone_no: string
-  payment_method: {[key: string]: string}
+  payment_method: { [key: string]: string }
   booked_at: string
   completed_at: string | null
   status: string
