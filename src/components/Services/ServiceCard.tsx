@@ -23,7 +23,7 @@ export default function ServiceCard(props: Service) {
           {props.name}
         </Heading>
         <Heading size="md" noOfLines={1}>
-          {props.serviceProvider}
+          {props.spCompanyName}
         </Heading>
       </CardHeader>
       <CardBody>
