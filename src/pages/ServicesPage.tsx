@@ -87,11 +87,11 @@ export default function ServicePage() {
                       value={rating}
                       onChange={(e) => setRating(Number(e.target.value))}
                     >
-                      <option value="1">1-star</option>
-                      <option value="2">2-star</option>
-                      <option value="3">3-star</option>
-                      <option value="4">4-star</option>
-                      <option value="5">5-star</option>
+                      <option value="1">1-star and above</option>
+                      <option value="2">2-star and above</option>
+                      <option value="3">3-star and above</option>
+                      <option value="4">4-star and above</option>
+                      <option value="5">5-star and above</option>
                     </Select>
                   </FormControl>
                   <FormControl>
