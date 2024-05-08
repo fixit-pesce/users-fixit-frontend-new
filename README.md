@@ -8,7 +8,7 @@ Fixit is your go-to app for booking skilled handymen and household services, pro
 
 - Fixit Backend: [https://github.com/fixit-pesce/fixit-backend-new](https://github.com/fixit-pesce/fixit-backend-new)
 
-- Fixit Users frontend: [https://github.com/fixit-pesce/users-fixit-frontend-new](https://github.com/fixit-pesce/users-fixit-frontend-new)
+- Fixit Service provider frontend: [https://github.com/fixit-pesce/users-fixit-frontend-new](https://github.com/fixit-pesce/sp-fixit-frontend)
 
 - Fixit Admin frontend: [https://github.com/fixit-pesce/admins-fixit-frontend](https://github.com/fixit-pesce/admins-fixit-frontend)
 
