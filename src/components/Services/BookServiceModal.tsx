@@ -141,6 +141,20 @@ export default function BookServiceModal({
       return
     }
 
+    if (paymentMethod === "Card") {
+      if (pinInputs.join("") === "") {
+        toast({
+          title: "Pin cannot be empty",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        })
+        setIsLoading(false)
+        return
+      }
+    }
+
     mutation.mutate({
       sp_username,
       service_name: service.service_name,
@@ -151,6 +165,7 @@ export default function BookServiceModal({
       phone_no: phone,
       payment_method: {
         type: paymentMethod,
+        card_no: pinInputs.join(""),
       },
     })
   }
