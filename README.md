@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+# Fixit User Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+Fixit is your go-to app for booking skilled handymen and household services, providing a wide array of professional service options at your fingertips.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Links to Related Repositories:
 
-## Expanding the ESLint configuration
+- Fixit Backend: [https://github.com/fixit-pesce/fixit-backend-new](https://github.com/fixit-pesce/fixit-backend-new)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Fixit Service provider frontend: [https://github.com/fixit-pesce/users-fixit-frontend-new](https://github.com/fixit-pesce/sp-fixit-frontend)
 
-- Configure the top-level `parserOptions` property like this:
+- Fixit Admin frontend: [https://github.com/fixit-pesce/admins-fixit-frontend](https://github.com/fixit-pesce/admins-fixit-frontend)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Installation
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/fixit-pesce/users-fixit-frontend-new.git
+   ```
+
+2. **Navigate to the project directory**
+
+   ```bash
+   cd users-fixit-frontend-new
+   ```
+
+3. **Install Dependencies:**
+   
+    a. Install yarn if not already installed
+
+    ```bash
+    npm i -g yarn
+    ```
+    
+    b. Install dependencies through yarn
+
+   ```bash
+   yarn
+   ```
+
+3. **Start server:**
+
+   ```bash
+   yarn dev
+   ```
