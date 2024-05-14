@@ -67,12 +67,36 @@ export default function MyProfile() {
 
   const handleSubmit = () => {
     setIsSaveLoading(true)
-    updateMutation.mutate({
-      username,
-      email,
-      first_name: firstName,
-      last_name: lastName,
-    })
+    updateMutation.mutate(
+      {
+        username,
+        email,
+        first_name: firstName,
+        last_name: lastName,
+      },
+      {
+        onSuccess: () => {
+          toast({
+            position: "top",
+            title: "Profile updated successfully",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          })
+        },
+        onError: (res: AxiosError) => {
+          toast({
+            position: "top",
+            title: res.response?.data
+              ? `Error: ${Object.entries(res.response?.data)[0][1]}`
+              : `Error: ${res.message}`,
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          })
+        },
+      }
+    )
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -125,15 +149,15 @@ export default function MyProfile() {
           <EditableTextInput defaultValue = {data?.phone_no ?? ""} type = "input" setText = {setPhoneNo}/>
         </FormControl> */}
           <Flex gap="4">
-            <Button colorScheme="green" onClick={onOpen}>
-              Change Password
-            </Button>
             <Button
-              colorScheme="blue"
+              colorScheme="green"
               onClick={handleSubmit}
               isLoading={isSaveLoading}
             >
               Save
+            </Button>
+            <Button colorScheme="blue" onClick={onOpen}>
+              Change Password
             </Button>
           </Flex>
           <ChangePasswordModal
