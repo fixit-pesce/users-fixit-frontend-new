@@ -42,6 +42,7 @@ export interface User {
 }
 
 export interface Booking {
+  booking_id: string
   service_name: string
   company_name: string
   category: string
@@ -51,6 +52,7 @@ export interface Booking {
   payment_method: {
     type: string
     card_no: string
+    status: string
   }
   booked_at: string
   completed_at: string | null

@@ -50,7 +50,7 @@ export default function BookServiceModal({
   const [phone, setPhone] = useState("")
   const [pinInputs, setPinInputs] = useState(Array(16).fill(""))
   const [paymentMethod, setPaymentMethod] = useState<
-    "Cash On Delivery" | "Card" | "UPI"
+    "Cash On Delivery" | "Card" | "UPI" | "Pay after service"
   >("Cash On Delivery")
 
   const [isLoading, setIsLoading] = useState(false)
@@ -166,6 +166,7 @@ export default function BookServiceModal({
       payment_method: {
         type: paymentMethod,
         card_no: pinInputs.join(""),
+        status: paymentMethod === "Pay after service" ? "TO BE PAID" : "PAID",
       },
     })
   }
@@ -228,8 +229,13 @@ export default function BookServiceModal({
                   ))}
                 </Flex>
                 <Radio value="UPI">UPI Payment</Radio>
-                <Image src="/src/assets/qrcode.png" alt="UPI" boxSize="300px" />
+                <Image
+                  src="/src/assets/qr-code.png"
+                  alt="UPI"
+                  boxSize="300px"
+                />
               </Stack>
+              <Radio value="Pay after service">Pay after service</Radio>
             </RadioGroup>
           </Box>
           <Text fontWeight="bold" textAlign="center">
