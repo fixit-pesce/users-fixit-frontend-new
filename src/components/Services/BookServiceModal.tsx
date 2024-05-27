@@ -239,7 +239,7 @@ export default function BookServiceModal({
             </RadioGroup>
           </Box>
           <Text fontWeight="bold" textAlign="center">
-            Are you are you want to book this service?
+            Are you want to book this service?
           </Text>
         </ModalBody>
         <ModalFooter justifyContent="center" gap="4">
